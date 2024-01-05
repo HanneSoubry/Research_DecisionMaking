@@ -17,14 +17,22 @@ public class PlayerBehavior
     // TODO: Handle action display
     protected void BasicAttack(ref PlayerCharacter.PlayerStats stats)
     {
-        Debug.Log("Excecuting Basic Attack");
+        FileWriter.instance.WriteToFile("Basic Attack\n");
         if (stats.IsBoostActive)
         {
             stats.pendingAttackDamage = 3 + stats.attackBoostValue;
+            FileWriter.instance.WriteToFile($"Doing {3 + stats.attackBoostValue} damage\n");
         }
         else
         {
             stats.pendingAttackDamage = 3;
+            FileWriter.instance.WriteToFile($"Doing 3 damage\n");
+        }
+
+        if (stats.IsBoostActive)
+        {
+            // decrease turns left
+            --stats.boostTurnsLeft;
         }
     }
 
@@ -36,8 +44,8 @@ public class PlayerBehavior
             return;
         }
 
-        Debug.Log("Excecuting Power Up");
-        stats.boostTurnsLeft = stats.boostDuration;
+        FileWriter.instance.WriteToFile("Power Up\n");
+        stats.boostTurnsLeft = stats.boostDuration; 
         stats.energy -= energyForPowerUp;
     }
 
@@ -49,17 +57,25 @@ public class PlayerBehavior
             return;
         }
 
-        Debug.Log("Excecuting Heavy Attack");
+        FileWriter.instance.WriteToFile("Heavy Attack\n");
         if (stats.IsBoostActive)
         {
             stats.pendingAttackDamage = 7 + stats.attackBoostValue;
+            FileWriter.instance.WriteToFile($"Doing {7 + stats.attackBoostValue} damage\n");
         }
         else
         {
             stats.pendingAttackDamage = 7;
+            FileWriter.instance.WriteToFile($"Doing 7 damage\n");
         }
 
         stats.energy -= energyForHeavyAttack;
+
+        if (stats.IsBoostActive)
+        {
+            // decrease turns left
+            --stats.boostTurnsLeft;
+        }
     }
 
     protected void Heal(ref PlayerCharacter.PlayerStats stats)
@@ -70,7 +86,7 @@ public class PlayerBehavior
             return;
         }
 
-        Debug.Log("Excecuting Heal");
+        FileWriter.instance.WriteToFile("Heal\n");
         stats.health += 5;
         if(stats.health < stats.maxHealth)
         {
@@ -78,5 +94,11 @@ public class PlayerBehavior
         }
 
         stats.energy -= energyForHeal;
+
+        if (stats.IsBoostActive)
+        {
+            // decrease turns left
+            --stats.boostTurnsLeft;
+        }
     }
 }

@@ -71,11 +71,13 @@ public class PlayerCharacter : MonoBehaviour
             case BehaviorType.TestBehavior:
                 {
                     behavior = new BehaviorRandom();
+                    FileWriter.instance.WriteToFile("random behavior");
                     break;
                 }
             case BehaviorType.Input:
                 {
                     behavior = new BehaviorInput();
+                    FileWriter.instance.WriteToFile("input from player");
                     break;
                 }
         }
@@ -89,6 +91,7 @@ public class PlayerCharacter : MonoBehaviour
         {
             ++stats.energy;
             UpdateStatsDisplay();
+            FileWriter.instance.WriteToFile($"energy {stats.energy}\n");
         }
 
         stats.pendingAttackDamage = 0;
@@ -114,6 +117,11 @@ public class PlayerCharacter : MonoBehaviour
 
         UpdateStatsDisplay();
         return false;
+    }
+
+    public void WriteStatsToFile()
+    {
+        FileWriter.instance.WriteToFile($"HP: {stats.health}, Energy: {stats.energy}, Boost: {stats.IsBoostActive}");
     }
 
     private void UpdateStatsDisplay()

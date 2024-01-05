@@ -10,41 +10,54 @@ public class GameManager : MonoBehaviour
     [SerializeField] private PlayerCharacter player1;
     [SerializeField] private PlayerCharacter player2;
     [SerializeField] private float turnDelay = 1;
+
+    // Game loop
     private int playerTurn = 1;
     private bool isGameRunning = true;
+    private Coroutine gameLoop = null;
+    private int matchCount = 0;
 
     [Header("Stats")]
     [SerializeField] private PlayerCharacter.PlayerStats playerInitialStats;
 
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        // Select player behaviors and start game
-        // Add restart game function
-        player1.Initialize(playerInitialStats);
-        player2.Initialize(playerInitialStats);
-
-        StartCoroutine(GameLoop());
+        gameLoop = StartCoroutine(GameLoop());
     }
 
     private IEnumerator GameLoop()
     {
+        FileWriter file = FileWriter.instance;
+
+        ++matchCount;
+        file.NewFile($"MatchResults\\Match{matchCount}.txt");
+
+        file.WriteToFile("Starting a new game with player 1 (");
+        player1.Initialize(playerInitialStats);
+        file.WriteToFile(") and player 2 (");
+        player2.Initialize(playerInitialStats);
+        file.WriteToFile(")\n\n");
+
         yield return new WaitForSeconds(turnDelay);
 
         while (isGameRunning)
         {
             if (playerTurn == 1)
             {
-                Debug.Log("Player 1 turn");
+                file.WriteToFile("Player 1: ");
                 int damageToOther = player1.MakeMove();
-                Debug.Log($"Doing {damageToOther} damage");
                 bool isDead = player2.TakeDamage(damageToOther);
+
+                WritePlayerStatsToFile();
 
                 if (isDead)
                 {
                     Debug.Log("Player 2 died");
+
+                    file.WriteToFile("Player 1 WON\n");
                     isGameRunning = false;
-                    // TODO: announce winner
+                    gameLoop = null;
                 }
 
                 playerTurn = 2;
@@ -52,16 +65,19 @@ public class GameManager : MonoBehaviour
             }
             else if (playerTurn == 2)
             {
-                Debug.Log("Player 2 turn");
+                file.WriteToFile("Player 2: ");
                 int damageToOther = player2.MakeMove();
-                Debug.Log($"Doing {damageToOther} damage");
                 bool isDead = player1.TakeDamage(damageToOther);
+
+                WritePlayerStatsToFile();
 
                 if (isDead)
                 {
                     Debug.Log("Player 1 died");
+
+                    file.WriteToFile("Player 2 WON\n");
                     isGameRunning = false;
-                    // TODO: announce winner
+                    gameLoop = null;
                 }
 
                 playerTurn = 1;
@@ -74,12 +90,24 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    void Update()
+    private void WritePlayerStatsToFile()
     {
-        if(!isGameRunning)
+        FileWriter file = FileWriter.instance;
+        file.WriteToFile("\nPlayer 1: ");
+        player1.WriteStatsToFile();
+        file.WriteToFile("\nPlayer 2: ");
+        player2.WriteStatsToFile();
+        file.WriteToFile("\n\n");
+    }
+
+    private void OnRestartGame()
+    {
+        if(isGameRunning)
         {
-            // Wait for restart
-            return;
+            StopCoroutine(gameLoop);
         }
+
+        isGameRunning = true;
+        StartCoroutine(GameLoop());
     }
 }

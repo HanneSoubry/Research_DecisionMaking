@@ -10,8 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 5339866162491033596}
   - component: {fileID: 8146563002059092239}
+  - component: {fileID: 962477438451217741}
   - component: {fileID: 7901687512955486119}
   - component: {fileID: 3719874952489740846}
+  - component: {fileID: 9135295186079125087}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -61,6 +63,18 @@ MonoBehaviour:
     boostDuration: 3
     attackBoostValue: 2
     boostTurnsLeft: 0
+--- !u!114 &962477438451217741
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2330552126405208672}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b6143a5d0b2fa14ab85143edbd63dfa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &7901687512955486119
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -106,3 +120,37 @@ MonoBehaviour:
   m_DeselectOnBackgroundClick: 1
   m_PointerBehavior: 0
   m_CursorLockBehavior: 0
+--- !u!114 &9135295186079125087
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2330552126405208672}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: 80cddc3c607487945af1b94dbdf845e8, type: 3}
+  m_NotificationBehavior: 0
+  m_UIInputModule: {fileID: 3719874952489740846}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents:
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 1a808756-428f-4cb6-bbc2-48f51f53fbee
+    m_ActionName: DefaultMap/RestartGame[/Keyboard/space]
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: DefaultMap
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}

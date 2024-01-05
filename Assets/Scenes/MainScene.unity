@@ -451,6 +451,10 @@ PrefabInstance:
       propertyPath: player2
       value: 
       objectReference: {fileID: 1946687942}
+    - target: {fileID: 8146563002059092239, guid: 80e73f5d7f1489d488cab89efdcc073a, type: 3}
+      propertyPath: turnDelay
+      value: 0.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
