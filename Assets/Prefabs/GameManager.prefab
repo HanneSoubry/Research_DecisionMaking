@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5339866162491033596}
   - component: {fileID: 8146563002059092239}
+  - component: {fileID: 5008952973254124657}
   - component: {fileID: 962477438451217741}
   - component: {fileID: 7901687512955486119}
   - component: {fileID: 3719874952489740846}
@@ -63,6 +64,18 @@ MonoBehaviour:
     boostDuration: 3
     attackBoostValue: 2
     boostTurnsLeft: 0
+--- !u!114 &5008952973254124657
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2330552126405208672}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3797e3a0e4a01114fbadbdf54a72641c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &962477438451217741
 MonoBehaviour:
   m_ObjectHideFlags: 0

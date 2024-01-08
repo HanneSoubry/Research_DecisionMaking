@@ -13,7 +13,7 @@ public class PlayerCharacter : MonoBehaviour
     {
         TestBehavior,
         Input,
-        BinaryTree,
+        BehaviorTree,
         UtilityAI,
         GOAP
     }
@@ -22,9 +22,7 @@ public class PlayerCharacter : MonoBehaviour
     {
         // stats
         public int health;
-        public int maxHealth;
         public int energy;
-        public int maxEnergy;
 
         // display
         [HideInInspector] public TMP_Text healthText;
@@ -33,8 +31,6 @@ public class PlayerCharacter : MonoBehaviour
 
         // damage
         [HideInInspector] public int pendingAttackDamage;
-        public int boostDuration;
-        public int attackBoostValue;
         [HideInInspector] public int boostTurnsLeft;
 
         public bool IsBoostActive
@@ -53,9 +49,13 @@ public class PlayerCharacter : MonoBehaviour
     [SerializeField] private TMP_Text energyText = null;
     [SerializeField] private TMP_Text boostText = null;
 
-    public void Initialize(PlayerStats initialStats)
+    public void Initialize()
     {
-        stats = initialStats;
+        stats.health = CommonData.instance.MaxHealth;
+        stats.energy = 0;
+
+        stats.pendingAttackDamage = 0;
+        stats.boostTurnsLeft = 0;
 
         if(healthText == null || energyText == null || boostText == null)
         {
@@ -70,7 +70,7 @@ public class PlayerCharacter : MonoBehaviour
         {
             case BehaviorType.TestBehavior:
                 {
-                    behavior = new BehaviorRandom();
+                    behavior = new BehaviorRandom(); 
                     FileWriter.instance.WriteToFile("random behavior");
                     break;
                 }
@@ -80,19 +80,28 @@ public class PlayerCharacter : MonoBehaviour
                     FileWriter.instance.WriteToFile("input from player");
                     break;
                 }
+            case BehaviorType.BehaviorTree:
+                {
+                    behavior = new BehaviorBehaviorTree();
+                    FileWriter.instance.WriteToFile("Behavior Tree");
+                    break;
+                }
         }
+
+        behavior.Initialize();
 
         UpdateStatsDisplay();
     }
 
     public int MakeMove()
     {
-        if(stats.energy < stats.maxEnergy)
+        if(stats.energy < CommonData.instance.MaxEnergy)
         {
             ++stats.energy;
-            UpdateStatsDisplay();
-            FileWriter.instance.WriteToFile($"energy {stats.energy}\n");
+            UpdateStatsDisplay();         
         }
+
+        FileWriter.instance.WriteToFile($"energy {stats.energy}\n");
 
         stats.pendingAttackDamage = 0;
         behavior.MakeMove(ref stats);

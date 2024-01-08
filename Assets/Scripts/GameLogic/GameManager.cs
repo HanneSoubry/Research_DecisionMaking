@@ -17,9 +17,6 @@ public class GameManager : MonoBehaviour
     private Coroutine gameLoop = null;
     private int matchCount = 0;
 
-    [Header("Stats")]
-    [SerializeField] private PlayerCharacter.PlayerStats playerInitialStats;
-
     // Start is called before the first frame update
     private void Start()
     {
@@ -34,9 +31,9 @@ public class GameManager : MonoBehaviour
         file.NewFile($"MatchResults\\Match{matchCount}.txt");
 
         file.WriteToFile("Starting a new game with player 1 (");
-        player1.Initialize(playerInitialStats);
+        player1.Initialize();
         file.WriteToFile(") and player 2 (");
-        player2.Initialize(playerInitialStats);
+        player2.Initialize();
         file.WriteToFile(")\n\n");
 
         yield return new WaitForSeconds(turnDelay);
@@ -108,6 +105,6 @@ public class GameManager : MonoBehaviour
         }
 
         isGameRunning = true;
-        StartCoroutine(GameLoop());
+        gameLoop = StartCoroutine(GameLoop());
     }
 }

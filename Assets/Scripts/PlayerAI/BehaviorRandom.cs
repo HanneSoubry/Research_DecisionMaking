@@ -21,17 +21,17 @@ public class BehaviorRandom : PlayerBehavior
                     }
                 case 1:
                     {
-                        requiredEnery = energyForPowerUp;
+                        requiredEnery = CommonData.instance.EnergyForPowerUp;
                         break;
                     }
                 case 2:
                     {
-                        requiredEnery = energyForHeavyAttack;
+                        requiredEnery = CommonData.instance.EnergyForHeavyAttack;
                         break;
                     }
                 case 3:
                     {
-                        requiredEnery = energyForHeal;
+                        requiredEnery = CommonData.instance.EnergyForHeal;
                         break;
                     }
             }
