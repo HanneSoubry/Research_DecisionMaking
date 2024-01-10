@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class CommonData : MonoBehaviour
@@ -25,6 +26,7 @@ public class CommonData : MonoBehaviour
     [SerializeField] private int energyForPowerUp = 1;
     [SerializeField] private int energyForHeavyAttack = 2;
     [SerializeField] private int energyForHeal = 3;
+    [SerializeField] public TMP_Text actionText = null;
 
     public int MaxHealth { get { return maxHealth; } }
     public int MaxEnergy { get { return maxEnergy; } }
@@ -37,6 +39,4 @@ public class CommonData : MonoBehaviour
     public int EnergyForPowerUp { get { return energyForPowerUp; } }
     public int EnergyForHeavyAttack { get { return energyForHeavyAttack; } }
     public int EnergyForHeal { get { return energyForHeal; } }
-
-
 }

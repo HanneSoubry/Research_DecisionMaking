@@ -9,8 +9,8 @@ public class GameManager : MonoBehaviour
     [Header("Players")]
     [SerializeField] private PlayerCharacter player1;
     [SerializeField] private PlayerCharacter player2;
-    [SerializeField] private float turnDelay = 1;
     [SerializeField] private int startPlayer = 1;
+    [SerializeField] private float turnDelay = 1.0f;
 
     // Game loop
     private int playerTurn = 1;
@@ -71,6 +71,10 @@ public class GameManager : MonoBehaviour
             if (playerTurn == 1)
             {
                 file.WriteToFile("Player 1: ");
+                player1.RechargeEnergy();
+
+                yield return new WaitForSeconds(turnDelay);
+
                 int damageToOther = player1.MakeMove();
                 bool isDead = player2.TakeDamage(damageToOther);
 
@@ -91,6 +95,10 @@ public class GameManager : MonoBehaviour
             else if (playerTurn == 2)
             {
                 file.WriteToFile("Player 2: ");
+                player2.RechargeEnergy();
+
+                yield return new WaitForSeconds(turnDelay);
+
                 int damageToOther = player2.MakeMove();
                 bool isDead = player1.TakeDamage(damageToOther);
 

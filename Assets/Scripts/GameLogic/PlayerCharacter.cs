@@ -2,9 +2,9 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
-using TMPro;
 using Unity.VisualScripting.Dependencies.Sqlite;
 using UnityEngine;
+using UnityEngine.UI;
 using static UnityEngine.EventSystems.EventTrigger;
 
 public class PlayerCharacter : MonoBehaviour
@@ -25,9 +25,9 @@ public class PlayerCharacter : MonoBehaviour
         public int energy;
 
         // display
-        [HideInInspector] public TMP_Text healthText;
-        [HideInInspector] public TMP_Text energyText;
-        [HideInInspector] public TMP_Text boostText;
+        [HideInInspector] public Image healthImage;
+        [HideInInspector] public Image energyImage;
+        [HideInInspector] public Image boostImage;
 
         // damage
         [HideInInspector] public int pendingAttackDamage;
@@ -46,9 +46,10 @@ public class PlayerCharacter : MonoBehaviour
     public PlayerStats Stats { get { return stats; } }
 
     // Display
-    [SerializeField] private TMP_Text healthText = null;
-    [SerializeField] private TMP_Text energyText = null;
-    [SerializeField] private TMP_Text boostText = null;
+    [SerializeField] private Image healthImage = null;
+    [SerializeField] private Image energyImage = null;
+    [SerializeField] private Image boostImage = null;
+    private static string emptyText = "";
 
     public void Initialize()
     {
@@ -58,14 +59,14 @@ public class PlayerCharacter : MonoBehaviour
         stats.pendingAttackDamage = 0;
         stats.boostTurnsLeft = 0;
 
-        if(healthText == null || energyText == null || boostText == null)
+        if(healthImage == null || energyImage == null || boostImage == null)
         {
             Debug.LogError("Player stat texts not assigned");
         }
 
-        stats.healthText = healthText;
-        stats.energyText = energyText;
-        stats.boostText = boostText;
+        stats.healthImage = healthImage;
+        stats.energyImage = energyImage;
+        stats.boostImage = boostImage;
 
         switch(behaviorType)
         {
@@ -100,16 +101,20 @@ public class PlayerCharacter : MonoBehaviour
         UpdateStatsDisplay();
     }
 
-    public int MakeMove()
+    public void RechargeEnergy()
     {
-        if(stats.energy < CommonData.instance.MaxEnergy)
+        if (stats.energy < CommonData.instance.MaxEnergy)
         {
             ++stats.energy;
-            UpdateStatsDisplay();         
+            UpdateStatsDisplay();
         }
 
         FileWriter.instance.WriteToFile($"energy {stats.energy}\n");
+        CommonData.instance.actionText.text = emptyText;
+    }
 
+    public int MakeMove()
+    {
         stats.pendingAttackDamage = 0;
         behavior.MakeMove(ref stats);
         UpdateStatsDisplay();
@@ -142,8 +147,9 @@ public class PlayerCharacter : MonoBehaviour
 
     private void UpdateStatsDisplay()
     {
-        healthText.text = stats.health.ToString();
-        energyText.text = stats.energy.ToString();
-        boostText.text = stats.boostTurnsLeft.ToString();
+        CommonData data = CommonData.instance;
+        healthImage.fillAmount = (float)stats.health / (float)data.MaxHealth;
+        energyImage.fillAmount = (float)stats.energy / (float)data.MaxEnergy;
+        boostImage.fillAmount = (float)stats.boostTurnsLeft / (float)data.BoostDuration;
     }
 }

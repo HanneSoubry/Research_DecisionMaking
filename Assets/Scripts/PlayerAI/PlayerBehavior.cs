@@ -17,6 +17,11 @@ public class PlayerBehavior
 
     protected Action chosenAction = Action.None;
 
+    private static string basicAttackText = "Basic Attack";
+    private static string powerUpText = "Power Up";
+    private static string heavyAttackText = "Heavy Attack";
+    private static string healText = "Heal";
+
     public virtual void Initialize() {}
 
     public virtual void MakeMove(ref PlayerCharacter.PlayerStats stats)
@@ -28,6 +33,8 @@ public class PlayerBehavior
     protected void BasicAttack(ref PlayerCharacter.PlayerStats stats)
     {
         CommonData data = CommonData.instance;
+        data.actionText.text = basicAttackText;
+
         FileWriter.instance.WriteToFile("Basic Attack\n");
         if (stats.IsBoostActive)
         {
@@ -56,6 +63,7 @@ public class PlayerBehavior
             return;
         }
 
+        data.actionText.text = powerUpText;
         FileWriter.instance.WriteToFile("Power Up\n");
         stats.boostTurnsLeft = data.BoostDuration; 
         stats.energy -= data.EnergyForPowerUp;
@@ -70,6 +78,7 @@ public class PlayerBehavior
             return;
         }
 
+        data.actionText.text = heavyAttackText;
         FileWriter.instance.WriteToFile("Heavy Attack\n");
         if (stats.IsBoostActive)
         {
@@ -100,6 +109,7 @@ public class PlayerBehavior
             return;
         }
 
+        data.actionText.text = healText;
         FileWriter.instance.WriteToFile("Heal\n");
         stats.health += data.HealingBonus;
         if(stats.health > data.MaxHealth)
