@@ -10,12 +10,38 @@ public class GameManager : MonoBehaviour
     [SerializeField] private PlayerCharacter player1;
     [SerializeField] private PlayerCharacter player2;
     [SerializeField] private float turnDelay = 1;
+    [SerializeField] private int startPlayer = 1;
 
     // Game loop
     private int playerTurn = 1;
     private bool isGameRunning = true;
     private Coroutine gameLoop = null;
     private int matchCount = 0;
+
+    // Player stats
+    public PlayerCharacter.PlayerStats GetCurrentPlayerStats()
+    {
+        if(playerTurn == 1)
+        {
+            return player1.Stats;
+        }
+        else
+        {
+            return player2.Stats;
+        }
+    }
+
+    public PlayerCharacter.PlayerStats GetEnemyPlayerStats()
+    {
+        if (playerTurn == 1)
+        {
+            return player2.Stats;
+        }
+        else
+        {
+            return player1.Stats;
+        }
+    }
 
     // Start is called before the first frame update
     private void Start()
@@ -30,11 +56,13 @@ public class GameManager : MonoBehaviour
         ++matchCount;
         file.NewFile($"MatchResults\\Match{matchCount}.txt");
 
+        playerTurn = startPlayer;
         file.WriteToFile("Starting a new game with player 1 (");
         player1.Initialize();
         file.WriteToFile(") and player 2 (");
         player2.Initialize();
-        file.WriteToFile(")\n\n");
+        file.WriteToFile($")\nFirst turn goes to player {startPlayer}\n\n");
+        Debug.Log($"First turn goes to player {startPlayer}");
 
         yield return new WaitForSeconds(turnDelay);
 

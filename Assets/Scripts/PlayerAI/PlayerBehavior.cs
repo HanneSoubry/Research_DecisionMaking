@@ -31,8 +31,8 @@ public class PlayerBehavior
         FileWriter.instance.WriteToFile("Basic Attack\n");
         if (stats.IsBoostActive)
         {
-            stats.pendingAttackDamage = data.BasicAttackDamage + data.BoostValue;
-            FileWriter.instance.WriteToFile($"Doing {data.BasicAttackDamage + data.BoostValue} damage\n");
+            stats.pendingAttackDamage = data.BoostedBasicAttackDamage;
+            FileWriter.instance.WriteToFile($"Doing {data.BoostedBasicAttackDamage} damage\n");
         }
         else
         {
@@ -73,8 +73,8 @@ public class PlayerBehavior
         FileWriter.instance.WriteToFile("Heavy Attack\n");
         if (stats.IsBoostActive)
         {
-            stats.pendingAttackDamage = data.HeavyAttackDamage + data.BoostValue;
-            FileWriter.instance.WriteToFile($"Doing {data.HeavyAttackDamage + data.BoostValue} damage\n");
+            stats.pendingAttackDamage = data.BoostedHeavyAttackDamage;
+            FileWriter.instance.WriteToFile($"Doing {data.BoostedHeavyAttackDamage} damage\n");
         }
         else
         {

@@ -14,13 +14,14 @@ public class CommonData : MonoBehaviour
     }
 
     // DATA
-    [SerializeField] private int maxHealth = 40;
+    [SerializeField] private int maxHealth = 50;
     [SerializeField] private int maxEnergy = 3;
     [SerializeField] private int boostDuration = 3;
-    [SerializeField] private int boostValue = 2;
+    [SerializeField] private int boostedBasicAttackDamage = 5;
+    [SerializeField] private int boostedHeavyAttackDamage = 9;
     [SerializeField] private int basicAttackDamage = 3;
-    [SerializeField] private int heavyAttackDamage = 7;
-    [SerializeField] private int healingBonus = 5;
+    [SerializeField] private int heavyAttackDamage = 6;
+    [SerializeField] private int healingBonus = 10;
     [SerializeField] private int energyForPowerUp = 1;
     [SerializeField] private int energyForHeavyAttack = 2;
     [SerializeField] private int energyForHeal = 3;
@@ -28,7 +29,8 @@ public class CommonData : MonoBehaviour
     public int MaxHealth { get { return maxHealth; } }
     public int MaxEnergy { get { return maxEnergy; } }
     public int BoostDuration { get { return boostDuration; } }
-    public int BoostValue { get { return boostValue; } }
+    public int BoostedBasicAttackDamage { get { return boostedBasicAttackDamage; } }
+    public int BoostedHeavyAttackDamage { get { return boostedHeavyAttackDamage; } }
     public int BasicAttackDamage { get { return basicAttackDamage; } }
     public int HeavyAttackDamage { get { return heavyAttackDamage; } }
     public int HealingBonus { get { return healingBonus; } }

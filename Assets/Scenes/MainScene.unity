@@ -133,7 +133,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4460730694875407832, guid: be2bac80065044c4d96ce8aafb1134c4, type: 3}
       propertyPath: m_Name
-      value: Player1
+      value: PlayerBehaviorTree
       objectReference: {fileID: 0}
     - target: {fileID: 5200568708087978161, guid: be2bac80065044c4d96ce8aafb1134c4, type: 3}
       propertyPath: m_LocalPosition.x
@@ -174,6 +174,12 @@ PrefabInstance:
     - target: {fileID: 5200568708087978161, guid: be2bac80065044c4d96ce8aafb1134c4, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6682929326898878566, guid: be2bac80065044c4d96ce8aafb1134c4, type: 3}
+      propertyPath: m_text
+      value: 'Behavior
+
+        Tree'
       objectReference: {fileID: 0}
     - target: {fileID: 6872758695799084796, guid: be2bac80065044c4d96ce8aafb1134c4, type: 3}
       propertyPath: behaviorType
@@ -457,7 +463,7 @@ PrefabInstance:
       objectReference: {fileID: 1946687942}
     - target: {fileID: 8146563002059092239, guid: 80e73f5d7f1489d488cab89efdcc073a, type: 3}
       propertyPath: turnDelay
-      value: 0.5
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -512,9 +518,13 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4386336350814613268, guid: 88fb93a29a09eaa4aa2560dc24948bc8, type: 3}
+      propertyPath: m_text
+      value: Utility AI
+      objectReference: {fileID: 0}
     - target: {fileID: 4539941672082858382, guid: 88fb93a29a09eaa4aa2560dc24948bc8, type: 3}
       propertyPath: behaviorType
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5355250829117508463, guid: 88fb93a29a09eaa4aa2560dc24948bc8, type: 3}
       propertyPath: m_PresetInfoIsWorld
@@ -522,7 +532,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6739178988676305578, guid: 88fb93a29a09eaa4aa2560dc24948bc8, type: 3}
       propertyPath: m_Name
-      value: Player2
+      value: PlayerUtilityAI
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

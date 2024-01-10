@@ -43,6 +43,7 @@ public class PlayerCharacter : MonoBehaviour
     [SerializeField] private BehaviorType behaviorType;
     private PlayerBehavior behavior = null;
     private PlayerStats stats = new PlayerStats();
+    public PlayerStats Stats { get { return stats; } }
 
     // Display
     [SerializeField] private TMP_Text healthText = null;
@@ -86,6 +87,12 @@ public class PlayerCharacter : MonoBehaviour
                     FileWriter.instance.WriteToFile("Behavior Tree");
                     break;
                 }
+            case BehaviorType.UtilityAI:
+                {
+                    behavior = new BehaviorUtilityAI();
+                    FileWriter.instance.WriteToFile("Utility AI");
+                    break;
+                }
         }
 
         behavior.Initialize();
@@ -115,7 +122,7 @@ public class PlayerCharacter : MonoBehaviour
     {
         stats.health -= damage;
 
-        if(stats.health < 0)
+        if(stats.health <= 0)
         {
             stats.health = 0;
             UpdateStatsDisplay();
