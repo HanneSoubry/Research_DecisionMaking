@@ -11,7 +11,7 @@ namespace UtilityAI
         public PlayerBehavior.Action ChooseAction()
         {
             UtilityAction bestAction = null;
-            int bestScore = 0;
+            float bestScore = 0;
 
             foreach(UtilityAction a in actions)
             {
@@ -33,11 +33,13 @@ namespace UtilityAI
                 }
 
                 // if can execute -> how usefull is it?
-                int score = 0;
+                float score = 0;
                 foreach(Consideration consideration in a.Considerations)
                 {
                     score += consideration.Evaluate();
                 }
+                // Take average of multiple considerations
+                score /= a.Considerations.Count;
 
                 // check with current best action
                 if(score > bestScore)

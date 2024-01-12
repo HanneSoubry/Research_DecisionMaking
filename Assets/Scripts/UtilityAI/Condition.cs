@@ -20,7 +20,7 @@ namespace UtilityAI
         }
 
         // YES or NO question
-        // Is it possible to execute? Does it make sense at all?
+        // Is it possible to execute?
         public abstract bool Evaluate();
     }
 

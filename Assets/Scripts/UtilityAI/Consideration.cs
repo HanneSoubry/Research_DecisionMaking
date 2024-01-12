@@ -15,13 +15,13 @@ namespace UtilityAI
             }
         }
 
-        // Is it usefull? Give score
-        public abstract int Evaluate();
+        // Is it usefull? Give score between 0 and 10
+        public abstract float Evaluate();
     }
 
     public class ConsiderationBasicAttackValue : Consideration
     {
-        public override int Evaluate()
+        public override float Evaluate()
         {
             GameManager gameManager = GetGameManager;
             CommonData data = CommonData.instance;
@@ -70,7 +70,7 @@ namespace UtilityAI
 
     public class ConsiderationPowerUpValue : Consideration
     {
-        public override int Evaluate()
+        public override float Evaluate()
         {
             GameManager gameManager = GetGameManager;
             CommonData data = CommonData.instance;
@@ -104,7 +104,7 @@ namespace UtilityAI
     }
     public class ConsiderationHeavyAttackValue : Consideration
     {
-        public override int Evaluate()
+        public override float Evaluate()
         {
             GameManager gameManager = GetGameManager;
             CommonData data = CommonData.instance;
@@ -140,7 +140,7 @@ namespace UtilityAI
 
     public class ConsiderationHealValue : Consideration
     {
-        public override int Evaluate()
+        public override float Evaluate()
         {
             GameManager gameManager = GetGameManager;
             CommonData data = CommonData.instance;
