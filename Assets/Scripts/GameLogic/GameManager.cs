@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
     private bool isGameRunning = true;
     private Coroutine gameLoop = null;
     private int matchCount = 0;
+    private int turnCount = 0;
 
     // Player stats
     public PlayerCharacter.PlayerStats GetCurrentPlayerStats()
@@ -57,6 +58,7 @@ public class GameManager : MonoBehaviour
         file.NewFile($"MatchResults\\Match{matchCount}.txt");
 
         playerTurn = startPlayer;
+        turnCount = 0;
         file.WriteToFile("Starting a new game with player 1 (");
         player1.Initialize();
         file.WriteToFile(") and player 2 (");
@@ -70,6 +72,8 @@ public class GameManager : MonoBehaviour
         {
             if (playerTurn == 1)
             {
+                ++turnCount;
+
                 file.WriteToFile("Player 1: ");
                 player1.RechargeEnergy();
 
@@ -85,6 +89,8 @@ public class GameManager : MonoBehaviour
                     Debug.Log("Player 2 died");
 
                     file.WriteToFile("Player 1 WON\n");
+                    file.WriteToFile($"Battle took {turnCount} turns\n");
+                    Debug.Log($"Battle took {turnCount} turns\n");
                     isGameRunning = false;
                     gameLoop = null;
                 }
@@ -94,6 +100,8 @@ public class GameManager : MonoBehaviour
             }
             else if (playerTurn == 2)
             {
+                ++turnCount;
+
                 file.WriteToFile("Player 2: ");
                 player2.RechargeEnergy();
 
@@ -109,6 +117,8 @@ public class GameManager : MonoBehaviour
                     Debug.Log("Player 1 died");
 
                     file.WriteToFile("Player 2 WON\n");
+                    file.WriteToFile($"Battle took {turnCount} turns\n");
+                    Debug.Log($"Battle took {turnCount} turns\n");
                     isGameRunning = false;
                     gameLoop = null;
                 }
