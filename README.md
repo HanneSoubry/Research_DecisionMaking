@@ -1,2 +1,2 @@
 # Research_DecisionMaking
- Research project for thesis about decision making techniques binary tree, utility AI and GOAP
+ Here you can find my project to research and compare decision making techniques Binary Tree, Utility AI and Goal Oriented Action Planning for my thesis.
