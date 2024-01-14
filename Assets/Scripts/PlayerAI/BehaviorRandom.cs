@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Assertions;
 
 public class BehaviorRandom : PlayerBehavior
 {
@@ -8,7 +9,7 @@ public class BehaviorRandom : PlayerBehavior
     {
         // TEST BEHAVIOR
         int requiredEnery = 0;
-        int action = 0;
+        int action;
         do
         {
             action = Random.Range(0, 4);
@@ -35,7 +36,7 @@ public class BehaviorRandom : PlayerBehavior
                         break;
                     }
             }
-        } while (stats.energy <= requiredEnery);
+        } while (stats.energy < requiredEnery);
 
         switch (action)
         {

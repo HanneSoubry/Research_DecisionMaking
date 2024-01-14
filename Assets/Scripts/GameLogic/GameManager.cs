@@ -64,7 +64,7 @@ public class GameManager : MonoBehaviour
         file.WriteToFile(") and player 2 (");
         player2.Initialize();
         file.WriteToFile($")\nFirst turn goes to player {startPlayer}\n\n");
-        Debug.Log($"First turn goes to player {startPlayer}");
+        //Debug.Log($"First turn goes to player {startPlayer}");
 
         yield return new WaitForSeconds(turnDelay);
 
@@ -86,11 +86,9 @@ public class GameManager : MonoBehaviour
 
                 if (isDead)
                 {
-                    Debug.Log("Player 2 died");
-
                     file.WriteToFile("Player 1 WON\n");
                     file.WriteToFile($"Battle took {turnCount} turns\n");
-                    Debug.Log($"Battle took {turnCount} turns\n");
+                    Debug.Log($"Winner: player 1; Duration: {turnCount} turns\n");
                     isGameRunning = false;
                     gameLoop = null;
                 }
@@ -114,11 +112,9 @@ public class GameManager : MonoBehaviour
 
                 if (isDead)
                 {
-                    Debug.Log("Player 1 died");
-
                     file.WriteToFile("Player 2 WON\n");
                     file.WriteToFile($"Battle took {turnCount} turns\n");
-                    Debug.Log($"Battle took {turnCount} turns\n");
+                    Debug.Log($"Winner: player 2; Duration: {turnCount} turns\n");
                     isGameRunning = false;
                     gameLoop = null;
                 }

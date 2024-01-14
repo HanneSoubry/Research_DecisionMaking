@@ -133,7 +133,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4460730694875407832, guid: be2bac80065044c4d96ce8aafb1134c4, type: 3}
       propertyPath: m_Name
-      value: PlayerBehaviorTree
+      value: Player1
       objectReference: {fileID: 0}
     - target: {fileID: 5200568708087978161, guid: be2bac80065044c4d96ce8aafb1134c4, type: 3}
       propertyPath: m_LocalPosition.x
@@ -572,7 +572,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6739178988676305578, guid: 88fb93a29a09eaa4aa2560dc24948bc8, type: 3}
       propertyPath: m_Name
-      value: PlayerUtilityAI
+      value: Player2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
